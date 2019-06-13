@@ -46,12 +46,6 @@ func getJson(url string, target interface{}) error {
 	return json.NewDecoder(r.Body).Decode(target)
 }
 
-type Artist struct {
-	Name      string `json:"name"`
-	Listeners int64  `json:"streams"`
-	Url       string `json:"url"`
-}
-
 type ArtistsAPIResponse struct {
 	TopArtists struct {
 		Attr struct {
