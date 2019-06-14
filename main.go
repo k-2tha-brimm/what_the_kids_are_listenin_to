@@ -13,7 +13,6 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", HomeHandler)
 
 	var Artist = graphql.NewObject(graphql.ObjectConfig{
 		Name: "Artist",
@@ -31,9 +30,12 @@ func main() {
 			"artists": &graphql.Field{
 				Type: graphql.NewList(Artist),
 				Args: graphql.FieldConfigArgument{
-					"name": &graphql.ArgumentConfig{
+					"mbid": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
+				},
+				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+					return params.Args["mbid"], nil
 				},
 			},
 		},
@@ -45,19 +47,12 @@ func main() {
 	)
 
 	h := handler.New(&handler.Config{
-		Schema: &schema,
+		Schema:   &schema,
 		GraphiQL: true,
 	})
 
+	r.HandleFunc("/", HomeHandler)
 	r.Handle("/graphql", h)
-	
-	// r.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
-	// 	result := graphql.Do(graphql.Params{
-	// 		Schema: schema,
-	// 		RequestString: r.URL.Query().Get("Query"),
-	// 	})
-	// 	json.NewEncoder(w).Encode(result)
-	// })
 
 	var port string = ":3000"
 	fmt.Println("Listening on port " + port)
@@ -90,19 +85,19 @@ func getJson(url string, target interface{}) error {
 	return json.NewDecoder(r.Body).Decode(target)
 }
 
-
 type ArtistsAPIResponse struct {
 	TopArtists struct {
 		Attr struct {
-			Country    string `json:"country"`
-			Page       string `json:"page"`
-			PerPage    string `json:"perPage"`
-			Total      string `json:"total"`
+			Country string `json:"country"`
+			Page    string `json:"page"`
+			PerPage string `json:"perPage"`
+			Total   string `json:"total"`
 		} `json:"@attr"`
 		Artist []struct {
-			Listeners  string `json:"listeners"`
-			Name       string `json:"name"`
-			URL        string `json:"url"`
+			Listeners string `json:"listeners"`
+			MBID      string `json:"mbid"`
+			Name      string `json:"name"`
+			URL       string `json:"url"`
 		} `json:"artist"`
 	} `json:"topArtists"`
 }
