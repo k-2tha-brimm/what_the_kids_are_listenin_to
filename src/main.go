@@ -7,52 +7,12 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/graphql-go/graphql"
-	"github.com/graphql-go/handler"
 )
 
 func main() {
 	r := mux.NewRouter()
 
-	var Artist = graphql.NewObject(graphql.ObjectConfig{
-		Name: "Artist",
-		Fields: graphql.Fields{
-			"name": &graphql.Field{
-				Type: graphql.String,
-			},
-		},
-	})
-
-	// setting up our root query
-	rootQuery := graphql.NewObject(graphql.ObjectConfig{
-		Name: "Query",
-		Fields: graphql.Fields{
-			"artists": &graphql.Field{
-				Type: graphql.NewList(Artist),
-				Args: graphql.FieldConfigArgument{
-					"mbid": &graphql.ArgumentConfig{
-						Type: graphql.String,
-					},
-				},
-				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-					return params.Args["mbid"], nil
-				},
-			},
-		},
-	})
-
-	// setting up the graphql schema
-	schema, _ := graphql.NewSchema(
-		graphql.SchemaConfig{Query: rootQuery},
-	)
-
-	h := handler.New(&handler.Config{
-		Schema:   &schema,
-		GraphiQL: true,
-	})
-
-	r.HandleFunc("/", HomeHandler)
-	r.Handle("/graphql", h)
+	r.HandleFunc("/", HomeHandler).Methods("GET")
 
 	var port string = ":3000"
 	fmt.Println("Listening on port " + port)
