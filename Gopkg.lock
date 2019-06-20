@@ -10,40 +10,80 @@
   version = "v1.7.2"
 
 [[projects]]
-  digest = "1:7fbb40f65374cb64a7bf3f1f74e2cb4c4437d93bc3d8921cf7e3d7ad2ab20989"
-  name = "github.com/graphql-go/graphql"
+  digest = "1:fe167e8f858cbfc10c721f2000f2446140800bb53fa83c088e03d191275611a4"
+  name = "github.com/onsi/gomega"
   packages = [
     ".",
-    "gqlerrors",
-    "language/ast",
-    "language/kinds",
-    "language/lexer",
-    "language/location",
-    "language/parser",
-    "language/printer",
-    "language/source",
-    "language/typeInfo",
-    "language/visitor",
+    "format",
+    "internal/assertion",
+    "internal/asyncassertion",
+    "internal/oraclematcher",
+    "internal/testingtsupport",
+    "matchers",
+    "matchers/support/goraph/bipartitegraph",
+    "matchers/support/goraph/edge",
+    "matchers/support/goraph/node",
+    "matchers/support/goraph/util",
+    "types",
   ]
   pruneopts = "UT"
-  revision = "2b0b7340d2285b861482047fbf5de0488e021bea"
-  version = "v0.7.8"
+  revision = "90e289841c1ed79b7a598a7cd9959750cb5e89e2"
+  version = "v1.5.0"
 
 [[projects]]
-  digest = "1:fef0874d72d1f1f1cb61d390980fef4abdfb9d4a52446556e4414627833e3702"
-  name = "github.com/graphql-go/handler"
+  branch = "master"
+  digest = "1:a167b5c532f3245f5a147ade26185f16d6ee8f8d3f6c9846f447e9d8b9705505"
+  name = "golang.org/x/net"
+  packages = [
+    "html",
+    "html/atom",
+    "html/charset",
+  ]
+  pruneopts = "UT"
+  revision = "b5b0513f8c1bb7c1e3e6f168fba117131fe2614a"
+
+[[projects]]
+  digest = "1:8a0baffd5559acaa560f854d7d525c02f4fec2d4f8a214398556fb661a10f6e0"
+  name = "golang.org/x/text"
+  packages = [
+    "encoding",
+    "encoding/charmap",
+    "encoding/htmlindex",
+    "encoding/internal",
+    "encoding/internal/identifier",
+    "encoding/japanese",
+    "encoding/korean",
+    "encoding/simplifiedchinese",
+    "encoding/traditionalchinese",
+    "encoding/unicode",
+    "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
+    "internal/utf8internal",
+    "language",
+    "runes",
+    "transform",
+    "unicode/cldr",
+  ]
+  pruneopts = "UT"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
+
+[[projects]]
+  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
+  name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "c1267356e6539d975e83bbea383c2bbb861dce5b"
-  version = "v0.2.3"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
+  version = "v2.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/gorilla/mux",
-    "github.com/graphql-go/graphql",
-    "github.com/graphql-go/handler",
+    "github.com/onsi/gomega",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
